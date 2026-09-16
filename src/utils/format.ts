@@ -17,13 +17,13 @@ export function getShortDate(iso: string): string {
   return `${date.getDate()} ${MONTHS[date.getMonth()]}`;
 }
 
-export function formatDayLabel(date: string, timezone = 'UTC'): string {
+export function formatDayLabel(date: string, _timezone = 'UTC'): string {
   return new Intl.DateTimeFormat('pt-BR', {
     day: '2-digit',
     month: 'short',
-    timeZone: timezone,
+    timeZone: 'UTC',
     weekday: 'short',
   })
-    .format(new Date(`${date}T12:00:00Z`))
+    .format(new Date(`${date}T00:00:00Z`))
     .replace('.', '');
 }
