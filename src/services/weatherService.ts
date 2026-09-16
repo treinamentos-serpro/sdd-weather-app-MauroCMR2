@@ -125,9 +125,13 @@ export async function searchCities(name: string): Promise<City[]> {
     return [];
   }
 
-  const response = await fetchWithTimeout(
-    `${GEOCODING_URL}?name=${encodeURIComponent(trimmedName)}`,
-  );
+  const params = new URLSearchParams({
+    name: trimmedName,
+    count: '10',
+    language: 'pt',
+    format: 'json',
+  });
+  const response = await fetchWithTimeout(`${GEOCODING_URL}?${params}`);
 
   if (!response.ok) {
     throw new WeatherServiceError(
